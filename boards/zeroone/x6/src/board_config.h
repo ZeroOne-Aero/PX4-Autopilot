@@ -215,10 +215,11 @@
 #define GPIO_HW_VER_SENSE      /* PH3 */  GPIO_ADC3_INP14
 #define HW_INFO_INIT_PREFIX    "ZeroOneX6"
 
-#define BOARD_NUM_SPI_CFG_HW_VERSIONS 2
+#define BOARD_NUM_SPI_CFG_HW_VERSIONS 3
 //                 Base/FMUM
-#define ZeroOneX6_0     HW_FMUM_ID(0x0)   // ZeroOneX6,     Sensor Set  Rev 0
-#define ZeroOneX6_1     HW_FMUM_ID(0x1)   // ZeroOneX6,     Sensor Set  Rev 1
+#define ZeroOneX6_0     HW_FMUM_ID(0x0)   // ZeroOneX6,
+#define ZeroOneX6_1     HW_FMUM_ID(0x1)   // ZeroOneX6 Pro,
+#define ZeroOneX6_2     HW_FMUM_ID(0x2)   // ZeroOneX6 Ultra,
 
 #define UAVCAN_NUM_IFACES_RUNTIME  1
 
@@ -244,6 +245,10 @@
  */
 #define DIRECT_PWM_OUTPUT_CHANNELS   9
 
+/* PWM Power */
+#define GPIO_PWM_VOLT_SEL               /* PG6  */ (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTG|GPIO_PIN6)
+#define PWM_5V_VOLT_SEL(on_true)        px4_arch_gpiowrite(GPIO_PWM_VOLT_SEL, (on_true))
+
 /* Power supply control and monitoring GPIOs */
 
 #define GPIO_nPOWER_IN_A                /* PG1  */ (GPIO_INPUT|GPIO_PULLUP|GPIO_PORTG|GPIO_PIN1)
@@ -260,13 +265,12 @@
 #define GPIO_VDD_5V_PERIPH_nOC          /* PE15 */ (GPIO_INPUT |GPIO_FLOAT|GPIO_PORTE|GPIO_PIN15)
 #define GPIO_VDD_5V_HIPOWER_nEN         /* PG10 */ (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_SET|GPIO_PORTG|GPIO_PIN10)
 #define GPIO_VDD_5V_HIPOWER_nOC         /* PF13 */ (GPIO_INPUT |GPIO_FLOAT|GPIO_PORTF|GPIO_PIN13)
-#define GPIO_VDD_3V3_SENSORS4_EN        /* PG8  */ (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTG|GPIO_PIN8)
+#define GPIO_VDD_3V3_SENSORS_EN        /* PG8  */ (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTG|GPIO_PIN8)
 #define GPIO_VDD_3V3_SPEKTRUM_POWER_EN  /* PH2  */ (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTH|GPIO_PIN2)
 #define GPIO_VDD_3V3_SD_CARD_EN         /* PC13 */ (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTC|GPIO_PIN13)
 
 /* Spare GPIO */
 
-#define GPIO_PG6                        /* PG6  */  (GPIO_INPUT|GPIO_PULLUP|GPIO_PORTG|GPIO_PIN6)
 #define GPIO_PD15                       /* PD15 */  (GPIO_INPUT|GPIO_FLOAT|GPIO_PORTD|GPIO_PIN15)
 
 /* ETHERNET GPIO */
@@ -282,7 +286,7 @@
 
 #define VDD_5V_PERIPH_EN(on_true)          px4_arch_gpiowrite(GPIO_VDD_5V_PERIPH_nEN, !(on_true))
 #define VDD_5V_HIPOWER_EN(on_true)         px4_arch_gpiowrite(GPIO_VDD_5V_HIPOWER_nEN, !(on_true))
-#define VDD_3V3_SENSORS4_EN(on_true)       px4_arch_gpiowrite(GPIO_VDD_3V3_SENSORS4_EN, (on_true))
+#define VDD_3V3_SENSORS_EN(on_true)       px4_arch_gpiowrite(GPIO_VDD_3V3_SENSORS_EN, (on_true))
 #define VDD_3V3_SPEKTRUM_POWER_EN(on_true) px4_arch_gpiowrite(GPIO_VDD_3V3_SPEKTRUM_POWER_EN, (on_true))
 #define READ_VDD_3V3_SPEKTRUM_POWER_EN()   px4_arch_gpioread(GPIO_VDD_3V3_SPEKTRUM_POWER_EN)
 #define VDD_3V3_SD_CARD_EN(on_true)        px4_arch_gpiowrite(GPIO_VDD_3V3_SD_CARD_EN, (on_true))
@@ -445,7 +449,7 @@
 		GPIO_VDD_5V_PERIPH_nOC,           \
 		GPIO_VDD_5V_HIPOWER_nEN,          \
 		GPIO_VDD_5V_HIPOWER_nOC,          \
-		GPIO_VDD_3V3_SENSORS4_EN,         \
+		GPIO_VDD_3V3_SENSORS_EN,         \
 		GPIO_VDD_3V3_SPEKTRUM_POWER_EN,   \
 		GPIO_VDD_3V3_SD_CARD_EN,          \
 		GPIO_PD15,                        \
@@ -456,14 +460,13 @@
 		GPIO_TONE_ALARM_IDLE,             \
 		GPIO_nSAFETY_SWITCH_LED_OUT_INIT, \
 		GPIO_SAFETY_SWITCH_IN,            \
-		GPIO_PG6,                         \
-		GPIO_nARMED_INIT                  \
+		GPIO_nARMED_INIT,                 \
+		GPIO_PWM_VOLT_SEL                \
 	}
 
 #define BOARD_ENABLE_CONSOLE_BUFFER
 
 #define PX4_I2C_BUS_MTD      4,5
-
 
 #define BOARD_NUM_IO_TIMERS 5
 

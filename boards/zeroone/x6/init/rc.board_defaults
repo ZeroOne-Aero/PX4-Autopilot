@@ -3,8 +3,8 @@
 # board specific defaults
 #------------------------------------------------------------------------------
 
-# By disabling all 3 INA modules, we use the
-# i2c_launcher instead.
+# Preserve the legacy automatic power-monitor discovery used by existing
+# ZeroOne X6 revisions. Explicit SENS_EN_* selections still take precedence.
 param set-default SENS_EN_INA238 0
 param set-default SENS_EN_INA228 0
 param set-default SENS_EN_INA226 0
@@ -27,3 +27,6 @@ else
 fi
 
 safety_button start
+
+# pwm voltage 3.3V/5V switch
+pwm_voltage_apply start
