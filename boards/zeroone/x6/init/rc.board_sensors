@@ -56,6 +56,21 @@ then
 	set INA_CONFIGURED yes
 fi
 
+# Keep power-monitor startup compatible with older X6 carrier revisions.
+if ver hwbasecmp 009 010 011
+then
+	pm_selector_auterion start
+else
+	if [ $INA_CONFIGURED = no ]
+	then
+		i2c_launcher start -b 1
+		if [ $HAVE_PM2 = yes ]
+		then
+			i2c_launcher start -b 2
+		fi
+	fi
+fi
+
 
 if ver hwtypecmp ZeroOneX6000
 then
@@ -85,6 +100,31 @@ then
 	if ! iim42653 -b 1 -s -R 8 start
 	then
 		iim42652 -b 1 -s -R 8 start       # X6 Pro V2
+	fi
+fi
+
+if ver hwtypecmp ZeroOneX6002             # X6 Ultra
+then
+	zeroone_sch16t -b 2 -s -R 2 start
+	if ! iim42653 -b 1 -s -R 8 start
+	then
+		iim42652 -b 1 -s -R 8 start
+	fi
+	if ! iim42653 -b 3 -s -R 0 start
+	then
+		iim42652 -b 3 -s -R 0 start
+	fi
+fi
+
+# Keep the legacy X6 sensor set available for older/unknown FMUM IDs.
+if ! ver hwtypecmp ZeroOneX6000 ZeroOneX6001 ZeroOneX6002
+then
+	icm45686 -b 2 -s -R 6 start
+	bmi088 -A -R 4 -s start
+	bmi088 -G -R 4 -s start
+	if ! icm45686 -b 1 -s -R 8 start
+	then
+		iim42652 -b 1 -s -R 8 start
 	fi
 fi
 
