@@ -219,7 +219,7 @@
 //                 Base/FMUM
 #define ZeroOneX6_0     HW_FMUM_ID(0x0)   // ZeroOneX6,
 #define ZeroOneX6_1     HW_FMUM_ID(0x1)   // ZeroOneX6 Pro,
-#define ZeroOneX6_2     HW_FMUM_ID(0x2)   // reserved
+#define ZeroOneX6_2     HW_FMUM_ID(0x2)   // ZeroOneX6 Ultra,
 
 #define UAVCAN_NUM_IFACES_RUNTIME  1
 
