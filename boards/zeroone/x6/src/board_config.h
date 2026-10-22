@@ -59,6 +59,7 @@
 /* PX4IO connection configuration */
 
 #define BOARD_USES_PX4IO_VERSION       2
+#define BOARD_HAS_STATIC_MANIFEST      1
 #define PX4IO_SERIAL_DEVICE            "/dev/ttyS5"
 #define PX4IO_SERIAL_TX_GPIO           GPIO_USART6_TX
 #define PX4IO_SERIAL_RX_GPIO           GPIO_USART6_RX
