@@ -54,7 +54,6 @@ else()
 		i2c.cpp
 		init.c
 		led.c
-		manifest.c
 		mtd.cpp
 		sdio.c
 		spi.cpp
