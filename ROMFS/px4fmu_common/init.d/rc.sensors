@@ -217,6 +217,13 @@ then
 	spl06 -X -a 0x77 start
 fi
 
+# SPL07 sensor external I2C
+if param compare -s SENS_EN_SPL07 1
+then
+	spl07 -X start
+	spl07 -X -a 0x77 start
+fi
+
 # SPA06 sensor external I2C
 if param compare -s SENS_EN_SPA06 1
 then

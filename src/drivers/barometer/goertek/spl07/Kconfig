@@ -1,0 +1,5 @@
+menuconfig DRIVERS_BAROMETER_GOERTEK_SPL07
+	bool "spl07"
+	default n
+	---help---
+		Enable support for the Goermicro SPL07-003 barometer (I2C/SPI)

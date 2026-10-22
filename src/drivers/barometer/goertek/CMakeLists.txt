@@ -33,3 +33,4 @@
 
 add_subdirectory(spl06)
 add_subdirectory(spa06)
+add_subdirectory(spl07)
