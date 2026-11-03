@@ -56,21 +56,6 @@ then
 	set INA_CONFIGURED yes
 fi
 
-# Keep power-monitor startup compatible with older X6 carrier revisions.
-if ver hwbasecmp 009 010 011
-then
-	pm_selector_auterion start
-else
-	if [ $INA_CONFIGURED = no ]
-	then
-		i2c_launcher start -b 1
-		if [ $HAVE_PM2 = yes ]
-		then
-			i2c_launcher start -b 2
-		fi
-	fi
-fi
-
 
 if ver hwtypecmp ZeroOneX6000
 then
