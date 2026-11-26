@@ -102,6 +102,12 @@ UavcanAirspeedBridge::ias_sub_cb(const
 	 * The proper solution is to be developed.
 	 */
 	report.timestamp   		= hrt_absolute_time();
+	device::Device::DeviceId device_id{};
+	device_id.devid_s.bus = 0;
+	device_id.devid_s.bus_type = device::Device::DeviceBusType_UAVCAN;
+	device_id.devid_s.devtype = DRV_DIFF_PRESS_DEVTYPE_UAVCAN;
+	device_id.devid_s.address = static_cast<uint8_t>(msg.getSrcNodeID().get());
+	report.device_id = device_id.devid;
 	report.indicated_airspeed_m_s   = msg.indicated_airspeed;
 	report.true_airspeed_m_s   	= _last_tas_m_s;
 
