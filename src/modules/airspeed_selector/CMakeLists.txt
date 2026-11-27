@@ -38,5 +38,6 @@ px4_add_module(
 		AirspeedValidator.cpp
 		AirspeedValidator.hpp
 	DEPENDS
+		sensor_calibration
 		wind_estimator
 )
