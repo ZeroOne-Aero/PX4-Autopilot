@@ -643,8 +643,13 @@ void Sih::reconstruct_sensors_signals(const hrt_abstime &time_now_us)
 void Sih::send_airspeed(const hrt_abstime &time_now_us)
 {
 	// TODO: send differential pressure instead?
+	device::Device::DeviceId device_id{};
+	device_id.devid_s.bus_type = device::Device::DeviceBusType::DeviceBusType_SIMULATION;
+	device_id.devid_s.devtype = DRV_DIFF_PRESS_DEVTYPE_SIM;
+
 	airspeed_s airspeed{};
 	airspeed.timestamp_sample = time_now_us;
+	airspeed.device_id = device_id.devid;
 
 	// regardless of vehicle type, body frame, etc this holds as long as wind=0
 	airspeed.true_airspeed_m_s = fmaxf(0.1f, _v_E.norm() + generate_wgn() * 0.2f);

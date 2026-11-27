@@ -101,9 +101,15 @@ UavcanAirspeedBridge::ias_sub_cb(const
 	 * to use an independent time source (based on hardware TIM5) instead of HRT.
 	 * The proper solution is to be developed.
 	 */
+	const auto node_id = msg.getSrcNodeID().get();
+	device::Device::DeviceId device_id{};
+	device_id.devid = get_device_id();
+	device_id.devid_s.address = node_id;
+
 	report.timestamp   		= hrt_absolute_time();
+	report.device_id		= device_id.devid;
 	report.indicated_airspeed_m_s   = msg.indicated_airspeed;
 	report.true_airspeed_m_s   	= _last_tas_m_s;
 
-	publish(msg.getSrcNodeID().get(), &report);
+	publish(node_id, &report);
 }

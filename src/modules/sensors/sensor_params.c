@@ -77,9 +77,10 @@ PARAM_DEFINE_FLOAT(CAL_AIR_TUBELEN, 0.2f);
 PARAM_DEFINE_FLOAT(CAL_AIR_TUBED_MM, 1.5f);
 
 /**
- * Differential pressure sensor offset
+ * Differential pressure sensor offset of the first airspeed sensor
  *
- * The offset (zero-reading) in Pascal
+ * The zero-reading [Pa] of the sensor holding calibration slot 0.
+ * Mirrors CAL_DPRES0_OFF for ground stations that use this value to check calibration.
  *
  * @category system
  * @group Sensor Calibration
