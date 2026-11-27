@@ -94,6 +94,14 @@ public:
 	void set_beta_gate(uint8_t gate_size) {_beta_gate = gate_size; }
 	void set_scale_init(float scale_init) {_scale_init = 1.f / math::constrain(scale_init, 0.1f, 10.f); }
 
+	void reset_scale_to_init()
+	{
+		_state(INDEX_TAS_SCALE) = _scale_init;
+		const matrix::Matrix<float, 2, 2> wind_covariance = _P.slice<2, 2>(0, 0);
+		_P.setZero();
+		_P.slice<2, 2>(0, 0) = wind_covariance;
+	}
+
 private:
 	enum {
 		INDEX_W_N = 0,
