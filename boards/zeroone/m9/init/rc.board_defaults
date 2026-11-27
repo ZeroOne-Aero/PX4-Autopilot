@@ -2,6 +2,12 @@
 #
 # board specific defaults
 #------------------------------------------------------------------------------
+# Dual airspeed: onboard AUAV L30D (I2C) + UAVCAN airspeed/differential pressure
+#------------------------------------------------------------------------------
+param set-default SENS_EN_AUAVX 3
+param set-default UAVCAN_SUB_ASRD 1
+param set-default UAVCAN_SUB_DPRES 1
+
 
 if ver hwbasecmp 009 010 011
 then
